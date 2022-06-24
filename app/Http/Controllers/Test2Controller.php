@@ -22,8 +22,8 @@ class Test2Controller extends Controller
      */
     public function index()
     {
-        // 
-        return view('test2');
+        $users = csv_import::simplePaginate(5);
+        return view('test2')->with("users",$users);
     }
 
     /**

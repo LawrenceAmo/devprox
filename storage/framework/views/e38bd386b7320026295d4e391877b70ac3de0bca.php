@@ -107,6 +107,56 @@
 
 </section>
 
+<div class="row px-5 py-3 w-100 ">
+       <section class="col-md-12  p-3">
+        <div class="shadow rounded border   p-3" >
+                        <div class="h5 text-center font-weight-bold">Curent Records in Database</div>
+
+       <table class="table table-striped w-100 table-inverse table-responsive">
+        <thead class="thead-inverse">
+            <tr> 
+                <th>#</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Initials</th>
+                <th>Age</th>
+                <th>Date of Birth</th>
+                
+            </tr>
+            </thead>
+            <tbody>
+                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <tr>
+                    <td scope="row"><?php echo e($loop->index+1); ?></td>
+                    <td><?php echo e($user->name); ?></td>
+                    <td><?php echo e($user->surname); ?></td>
+                    <td><?php echo e($user->initials); ?></td>
+                    <td><?php echo e($user->age); ?></td>
+                    <td><?php echo e($user->date_of_birth); ?></td>
+                    <td> 
+
+                  
+                        
+                         <form  action="<?php echo e(route('delete_user')); ?>" method="post">
+                            <?php echo csrf_field(); ?>
+                        <input type="hidden" name="userID" value="<?php echo e($user->id); ?>">
+                        <button type="submit" class="text-danger border-0 bg-transparent"><i class="fas fa-trash-alt    "></i></button>
+                        </form>
+                    </td>
+                </tr>
+               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?> 
+
+            </tbody>
+       </table>
+       <?php if(count($users) <=0): ?>
+             <div class="h5 text-center font-weight-bold text-muted"> <i class="fas fa-frown    "></i> &nbsp; No Data Yet!</div>
+       <?php endif; ?> 
+       
+        <div class="text-center rounded p-2"><?php echo e($users->onEachSide(5)->links()); ?></div>
+        </div>
+    </section>
+</div>
+
  
     </section>
 </div>

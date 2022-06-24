@@ -82,8 +82,7 @@ public function digit2($digit){
         // "Jerome",
         // "Jeromy",
         // "Jerrell",
-        // "Jerri",
-    );
+     );
 
    
     

@@ -107,6 +107,56 @@
 
 </section>
 
+<div class="row px-5 py-3 w-100 ">
+       <section class="col-md-12  p-3">
+        <div class="shadow rounded border   p-3" >
+                        <div class="h5 text-center font-weight-bold">Curent Records in Database</div>
+
+       <table class="table table-striped w-100 table-inverse table-responsive">
+        <thead class="thead-inverse">
+            <tr> 
+                <th>#</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Initials</th>
+                <th>Age</th>
+                <th>Date of Birth</th>
+                {{-- <th>Action</th> --}}
+            </tr>
+            </thead>
+            <tbody>
+                 @foreach ($users as $user )
+                <tr>
+                    <td scope="row">{{ $loop->index+1 }}</td>
+                    <td>{{ $user->name}}</td>
+                    <td>{{ $user->surname}}</td>
+                    <td>{{ $user->initials}}</td>
+                    <td>{{ $user->age}}</td>
+                    <td>{{ $user->date_of_birth}}</td>
+                    <td> 
+
+                  
+                        {{-- delete user with ID --}}
+                         <form  action="{{ route('delete_user') }}" method="post">
+                            @csrf
+                        <input type="hidden" name="userID" value="{{$user->id}}">
+                        <button type="submit" class="text-danger border-0 bg-transparent"><i class="fas fa-trash-alt    "></i></button>
+                        </form>
+                    </td>
+                </tr>
+               @endforeach 
+
+            </tbody>
+       </table>
+       @if (count($users) <=0)
+             <div class="h5 text-center font-weight-bold text-muted"> <i class="fas fa-frown    "></i> &nbsp; No Data Yet!</div>
+       @endif 
+       {{-- Pagination --}}
+        <div class="text-center rounded p-2">{{ $users->onEachSide(5)->links() }}</div>
+        </div>
+    </section>
+</div>
+
  
     </section>
 </div>
